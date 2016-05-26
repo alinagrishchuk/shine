@@ -11,6 +11,7 @@
                name="keywords"
                class="form-control input-lg"
                placeholder="First Name, Last Name, or Email Address"
+               ng-change="search(keywords)"
                ng-model="keywords">
         <span class="input-group-btn">
         <button class="btn btn-primary btn-lg"
@@ -19,6 +20,9 @@
         </button>
         </span>
       </div>
+      <h1 class="searchedFor" ng-if="searchedFor">
+        <small>Search for</small> {{searchedFor}}
+      </h1>
     </form>
   </section>
   <section class="search-results">
@@ -26,20 +30,18 @@
       <h1 class="h3">Results</h1>
     </header>
     <%= render partial: "pager", locals: { keywords: @keywords, page: @page } %>
-    <ol class="list-group">
-        <% @customers.each do |customer| %>
+    <ol class="list-group" ng-repeat="customer in customers">
           <li class="list-group-item clearfix">
             <h3 class="pull-right">
               <small class="text-uppercase">Joined</small>
-              <%= l customer.created_at.to_date %>
+              {{ customer.created_at | date }}
             </h3>
             <h2 class="h3">
-              <%= customer.first_name %> <%= customer.last_name %>
-              <small><%= customer.username %></small>
+              {{ customer.first_name }} {{ customer.last_name }}
+              <small> {{ customer.username }} </small>
             </h2>
-            <h4><%= customer.email %></h4>
+            <h4> {{ customer.email }} </h4>
           </li>
-         <% end %>
     </ol>
     <%= render partial: "pager", locals: { keywords: @keywords, page: @page } %>
   </section>
