@@ -24,5 +24,4 @@ feature "angular test" do
       expect(page).to have_content("Hello, Bob")
     end
   end
-
 end
