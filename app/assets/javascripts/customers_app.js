@@ -1,5 +1,5 @@
 var app = angular.module('customers',
-                          ['ngRoute','ngResource','templates']);
+                          ['ngRoute','ngResource','ngMessages', 'templates']);
 
 app.config(["$routeProvider", function ($routeProvider) {
   $routeProvider.when("/",{
@@ -40,24 +40,22 @@ app.controller("CustomerSearchController", [
         },function(response) {
             alert("There was a problem: " +  response.status);
         });
-      }
+      };
 
       $scope.viewDetails = function (customer) {
         $location.path("/" + customer.id);
-      }
+      };
+
     }
 ]);
 
 app.controller("CustomerDetailController",
     ["$scope", "$http", "$routeParams", "$resource",
     function($scope, $http, $routeParams, $resource) {
-      var customerId = $routeParams.id;
+      $scope.customerId = $routeParams.id;
       var Customer = $resource('/customers/:customerId.json');
-      $scope.customer = Customer.get({ "customerId": customerId});
-      alert("Ajax Call Initiated!");
-
-
-      /*$scope.customers = {};
+      $scope.customer = Customer.get({ "customerId":  $scope.customerId});
+        /*$scope.customers = {};
       $http.get("/customers/" + customerId + '.json').
             then(function (responce) {
               $scope.customer = responce.data;
@@ -65,8 +63,27 @@ app.controller("CustomerDetailController",
                 alert("there was a problem" + responce.status);
               }
             );*/
+
+      $scope.save = function() {
+        window.scope = $scope;
+        console.log($scope);
+        alert($scope.form.$valid);
+      };
     }]
 );
+
+app.controller("CustomerCreditCardController", [
+   "$scope", "$resource",
+    function ($scope, $resource) {
+      var CreditCardInfo = $resource('/fake_billing.json');
+      $scope.setCardholderId = function (cardholderId) {
+        console.log("get cardholder with id " + cardholderId);
+        $scope.creditCard = CreditCardInfo.get(
+            {"cardholder_id" : cardholderId});
+      }
+    }
+]);
+
 
 
 
