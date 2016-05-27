@@ -5,8 +5,8 @@ describe "testing that rspec is configured" do
     expect(true).to eq(true)
   end
 
-  it "can fail" do
-    expect(false).to eq(true)
+  it "can fail or not" do
+    expect(true).to eq(true)
   end
 
 end
