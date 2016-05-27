@@ -1,5 +1,5 @@
 var app = angular.module('customers',
-                          ['ngRoute','templates']);
+                          ['ngRoute','ngResource','templates']);
 
 app.config(["$routeProvider", function ($routeProvider) {
   $routeProvider.when("/",{
@@ -49,17 +49,22 @@ app.controller("CustomerSearchController", [
 ]);
 
 app.controller("CustomerDetailController",
-    ["$scope", "$http", "$routeParams",
-    function($scope, $http, $routeParams) {
+    ["$scope", "$http", "$routeParams", "$resource",
+    function($scope, $http, $routeParams, $resource) {
       var customerId = $routeParams.id;
-      $scope.customers = {};
+      var Customer = $resource('/customers/:customerId.json');
+      $scope.customer = Customer.get({ "customerId": customerId});
+      alert("Ajax Call Initiated!");
+
+
+      /*$scope.customers = {};
       $http.get("/customers/" + customerId + '.json').
             then(function (responce) {
               $scope.customer = responce.data;
               },function (responce) {
                 alert("there was a problem" + responce.status);
               }
-            );
+            );*/
     }]
 );
 
