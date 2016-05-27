@@ -29,7 +29,7 @@ app.controller("CustomerSearchController", [
       };
 
       $scope.search = function(searchTerm) {
-        if (searchTerm.length < 3) {
+        if (searchTerm.length < 1) {
           return;
         }
         $scope.searchedFor = searchTerm;
