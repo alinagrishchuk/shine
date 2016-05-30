@@ -41,21 +41,10 @@
             </li>
         </ul>
     </nav>
-    <ol class="list-group" ng-repeat="customer in customers">
-        <li class="list-group-item clearfix">
-            <h3 class="pull-right">
-                <small class="text-uppercase">Joined</small>
-                {{ customer.created_at | date }}
-            </h3>
-            <h2 class="h3">
-                {{ customer.first_name }} {{ customer.last_name }}
-                <small> {{ customer.username }} </small>
-            </h2>
-            <div class="pull-right">
-                <button class="btn btn-sm btn-primary"
-                        ng-click="viewDetails(customer)">View details...</button>
-            </div>
-            <h4> {{ customer.email }} </h4>
+    <ol class="list-group" >
+        <li class="list-group-item"
+            ng-repeat="customer in customers">
+            <customer-summary cust="customer" view-details-function="viewDetails"></customer-summary>
         </li>
     </ol>
     <nav>
