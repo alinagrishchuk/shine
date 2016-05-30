@@ -7,20 +7,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= csrf_meta_tags %>
 </head>
-<body class="container">
-   <% if notice.present? %>
-        <aside class ="alert alert-info">
-          <%= notice %>
-        </aside>
-    <% end %>
+<body >
    <% if alert.present? %>
       <aside class="alert alert-danger">
         <%= alert %>
       </aside>
    <% end %>
+   <% if user_signed_in? %>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Shine App</a>
+        </div>
+          <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li><%= link_to 'Customers', customers_path %></li>
+            </ul>
+            <p class="navbar-text navbar-right">
+              Signed in as <%= current_user.email %>,
+              <%= link_to 'log out', destroy_user_session_path, method: :delete, class: 'navbar-link' %>
+            </p>
+          </div>
 
-
-  <%= yield %>
-
+      </div>
+    </nav>
+   <%end%>
+   <div class="container">
+     <%= yield %>
+   </div>
 </body>
 </html>
