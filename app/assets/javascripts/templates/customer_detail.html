@@ -2,6 +2,13 @@
     <customer-summary cust="customer"></customer-summary>
     <hr>
 </header>
+<section>
+    <uib-alert ng-show="alert"
+               type="{{alert.type}}"
+               close="closeAlert()">
+        {{alert.message}}
+    </uib-alert>
+</section>
 
 <form novalidate name="form">
     <div class="row">
@@ -77,7 +84,7 @@
                                        name="city" ng-model="customer.shipping_city">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-4">
                             <div class="form-group">
                                 <label class="sr-only" for="state">State</label>
                                 <input type="text" class="form-control"
@@ -85,7 +92,7 @@
                                        name="state" ng-model="customer.shipping_state">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-xs-8">
                             <div class="form-group">
                                 <label class="sr-only" for="shippingZip">Zip</label>
                                 <input type="text" class="form-control"
@@ -159,7 +166,7 @@
                                        name="city"  ng-model="customer.billing_city">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-4">
                             <div class="form-group">
                                 <label class="sr-only" for="state">State</label>
                                 <input type="text" class="form-control"
@@ -167,7 +174,7 @@
                                        name="state" ng-model="customer.billing_state">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-xs-8">
                             <div class="form-group">
                                 <label class="sr-only" for="zip">Zip</label>
                                 <input type="text" class="form-control"
@@ -179,10 +186,15 @@
                 </section>
             </article>
             <div class="text-right">
+                <button ng-click="deactivate()"
+                        class="btn btn-danger btn-lg">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    Deactivate Customer
+                </button>
                 <button ng-click="save()"
                         class="btn btn-lg btn-primary"
-                        ng-disabled="form.$invalid || form.$pristine"
-                >
+                        ng-disabled="form.$invalid || form.$pristine">
+                    <i class="glyphicon glyphicon-save"></i>
                     Save Changes
                 </button>
             </div>

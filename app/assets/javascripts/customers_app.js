@@ -1,6 +1,6 @@
 (function() {
   var app = angular.module('customers',
-      ['ngRoute','ngResource','ngMessages', 'templates']);
+      ['ngRoute','ngResource','ngMessages','ui.bootstrap', 'templates']);
 })();
 
 
